@@ -1,0 +1,5 @@
+window.sr = ScrollReveal({reset: true,mobile:true,delay:150});
+  sr.reveal('.animate_top',{ distance:'100px',origin:'top',easing:'ease-out',duration:1000});
+  sr.reveal('.animate_right',{ distance:'5px',origin:'right',easing:'ease-out',duration:1300});
+  sr.reveal('.animate_bottom',{ distance:'100px',origin:'bottom',easing:'ease-out',duration:1000});
+  sr.reveal('.animate_left',{ distance:'5px',origin:'left',easing:'ease-out',duration:1300});
