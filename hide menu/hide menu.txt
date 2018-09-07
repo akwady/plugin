@@ -1,0 +1,11 @@
+define('DISALLOW_FILE_MODS',true);
+
+
+
+function chetz_remove_admin_menus(){
+
+// Check that the built-in WordPress function remove_menu_page() exists in the current installation
+if ( function_exists('remove_menu_page') ) { 
+
+    remove_menu_page( 'plugins.php' ); // Remove the Links tab by providing its slug
+}}add_action('admin_menu', 'chetz_remove_admin_menus');

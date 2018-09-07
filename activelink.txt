@@ -1,0 +1,17 @@
+$(function() {
+    var url = 0;
+    var pathname = location.pathname;
+    pathname = pathname.substr(1, pathname.length);
+    if(pathname.length > 0){
+        var position = pathname.indexOf('/');
+        pathname = pathname.substr(0, position*1);
+        url = location.origin + '/' + pathname + '/';
+    }
+    alert(url);
+    if(url.indexOf() >= 0){
+        $('.nav a[href^="' + url + '"]').addClass('active');
+    }
+    else{
+        $('.nav a[href^="' + url + '"]').addClass('active');
+    }
+});

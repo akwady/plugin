@@ -1,0 +1,1 @@
+<?php devvn_corenavi_ajax($news);?>

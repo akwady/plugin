@@ -1,0 +1,41 @@
+﻿
+//code phân trang ở trang chủ khi load bằng ajax
+function devvn_corenavi_ajax($custom_query = null, $paged = 1)
+{
+    global $wp_query, $wp_rewrite;
+    if ($custom_query) $main_query = $custom_query;
+    else $main_query = $wp_query;
+    $big = 999999999;
+    $total = isset($main_query->max_num_pages) ? $main_query->max_num_pages : '';
+    if ($total > 1) echo '<div class="pagenavi paginate_links">';
+    echo paginate_links(array(
+        'base' => trailingslashit(home_url()) . "{$wp_rewrite->pagination_base}/%#%/",
+        'format' => '?paged=%#%',
+        'current' => max(1, $paged),
+        'total' => $total,
+        'mid_size' => '5',
+        'prev_text' => __('<<', 'devvn'),
+        'next_text' => __('>>', 'devvn'),
+    ));
+    if ($total > 1) echo '</div>';
+}
+
+//Ajax load post
+add_action('wp_ajax_ajax_load_post', 'ajax_load_post_func');
+add_action('wp_ajax_nopriv_ajax_load_post', 'ajax_load_post_func');
+function ajax_load_post_func()
+{
+    $paged = isset($_POST['ajax_paged']) ? intval($_POST['ajax_paged']) : '';
+    if ($paged <= 0 || !$paged || !is_numeric($paged)) wp_send_json_error('Paged?');
+    $news = new WP_Query(array(
+        'post_type' => 'about-post',
+        'posts_per_page' => 2,
+        'paged' => $paged
+    ));
+    while ($news->have_posts()):$news->the_post(); ?>
+        <?php get_template_part('sections/ajax-about'); ?>
+    <?php endwhile;
+    wp_reset_query();
+    devvn_corenavi_ajax($news, $paged);
+    die();
+}

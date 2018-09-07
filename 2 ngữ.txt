@@ -1,0 +1,8 @@
+<?php $currentlang = get_bloginfo('language'); ?>
+    <?php if($currentlang=="vi"): ?>
+
+
+    <?php elseif($currentlang=="en-US"): ?>
+
+
+    <?php endif; ?>
